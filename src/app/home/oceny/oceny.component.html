@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title class="title">
+        Oceny
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    
+      <form [formGroup]="ocenyradio" (ngSubmit)="onSubmit()">
+       
+        <div formArrayName="items" 
+        *ngFor="let item of ocenyradio.get('items')['controls'];let i=index">
+         <div [formGroupName]="i">
+           <div>Ocena numer:{{i+1}}</div>
+           <ion-radio-group formControlName="ocena">
+           1:<ion-radio      value="1"  ></ion-radio>
+           
+              
+           2:<ion-radio       value="2"  ></ion-radio>
+          
+              
+          3:<ion-radio       value="3"  ></ion-radio>
+          
+              
+           4:<ion-radio       value="4"  ></ion-radio>
+          
+              
+           5:<ion-radio       value="5" ></ion-radio>
+          
+              
+           6:<ion-radio       value="6"  ></ion-radio>
+           </ion-radio-group>
+         </div>
+        </div>
+        
+        <ion-button type="submit" *ngIf="can_apply">Zatwierdź</ion-button>
+        <div *ngIf="!can_applys">
+          <ion-text color="danger">Proszę uzupełnić wszystkie pola!</ion-text>
+        </div>
+      </form>
+    
+  </ion-content>

@@ -1,14 +1,44 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Ionic Blank
+    <ion-title class="title">
+      Aplikacja I
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  
+  <form [formGroup]="formProfile" (ngSubmit)="onSubmit();">
+    <ion-item>
+      <ion-label>Imie:</ion-label>
+      <ion-input formControlName="name" type="text" [disabled]="degrees_set"></ion-input>
+    </ion-item>
+    <div class="ion-text-center" *ngIf="!formProfile.get('name').valid && 
+      (formProfile.get('name').dirty || formProfile.get('name').touched)">
+        <ion-text color="danger">Proszę poprawnie uzupełnić imię!</ion-text>
+    </div>
+    <ion-item>
+        <ion-label>Nazwisko:</ion-label>
+        <ion-input formControlName="surname" type="text"[disabled]="degrees_set"></ion-input>
+        
+      </ion-item>
+      <div class="ion-text-center" *ngIf="formProfile.get('surname').invalid && 
+      (formProfile.get('surname').dirty || formProfile.get('surname').touched)">
+        <ion-text color="danger">Proszę poprawnie uzupełnić nazwisko!</ion-text>
+    </div>
+      <ion-item>
+          <ion-label>Ilość Ocen:</ion-label>
+          <ion-input formControlName="degrees" type="number"[disabled]="degrees_set"></ion-input>
+          
+        </ion-item>
+        <div class="ion-text-center" *ngIf="formProfile.get('degrees').invalid && 
+      (formProfile.get('degrees').dirty || formProfile.get('degrees').touched)">
+        <ion-text color="danger">Proszę dodać poprawną ilość ocen(1-15)!</ion-text>
+    </div>
+           <ion-button *ngIf="this.degrees_set" (click)="finalclick();">{{button_text}}</ion-button>
+           <ion-button *ngIf="this.formProfile.valid && !this.degrees_set" type="submit">Oceny</ion-button>
+  </form>
+  <div *ngIf="degree_values>0" class="centered">
+    Twoja średnia to:{{degree_values}}
   </div>
 </ion-content>

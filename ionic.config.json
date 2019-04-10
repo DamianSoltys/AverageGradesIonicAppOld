@@ -1,5 +1,7 @@
 {
-  "name": "PierwszaApka",
-  "integrations": {},
+  "name": "Apka I",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
